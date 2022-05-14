@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "697706441523",
+    "project_id": "xtremecardz-e5eca",
+    "storage_bucket": "xtremecardz-e5eca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697706441523:android:112a4e5631e7ade419ec46",
+        "android_client_info": {
+          "package_name": "com.zeoharlem.append.xtremecardz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697706441523-uc5u52l1l3c10phon28pomcgiqf520us.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zeoharlem.append.xtremecardz",
+            "certificate_hash": "ffc923fa81584a939356c0571f42764eda11147a"
+          }
+        },
+        {
+          "client_id": "697706441523-jnf249p1fidqh7cvbv4e3r5nlu0ocdkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCq2hNLFQ4T6T4IEnJwAVnSMvO6kgL2pE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697706441523-jnf249p1fidqh7cvbv4e3r5nlu0ocdkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

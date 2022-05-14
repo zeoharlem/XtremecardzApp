@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_video_call"
+        android:title="Send Video"
+        app:showAsAction="always"
+        app:iconTint="@color/white"
+        android:icon="@drawable/video_outline" />
+
+    <item
+        android:id="@+id/action_call_user"
+        android:title="Call User"
+        app:showAsAction="always"
+        app:iconTint="@color/white"
+        android:icon="@drawable/telephone" />
+
+<!--    <item-->
+<!--        android:id="@+id/action_message_user"-->
+<!--        android:title="Send Message"-->
+<!--        app:showAsAction="always"-->
+<!--        app:iconTint="@color/white"-->
+<!--        android:icon="@drawable/send" />-->
+
+</menu>

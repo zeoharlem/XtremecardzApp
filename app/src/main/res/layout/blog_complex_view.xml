@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/blog_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        app:cardCornerRadius="@dimen/_16dp"
+        app:cardElevation="@dimen/_10dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/blog_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kamala"
+            tools:srcCompact="@drawable/kamala"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:background="@drawable/round_corner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/_20dp"
+            android:layout_margin="@dimen/_10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/blog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:lineSpacingExtra="@dimen/_5dp"
+                android:text="Waking the giant up in time. Don't sleep on the journey"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/blog_desc"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_5dp"-->
+<!--                -->
+<!--                android:maxLines="2"-->
+<!--                android:text="Waking the giant up in time. Don't sleep"-->
+<!--                android:textColor="@color/grey_dark"-->
+<!--                android:textSize="13sp" />-->
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/blog_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:text="News"
+                    android:textColor="@color/yellow_700"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/blog_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:text="2 hours Ago"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

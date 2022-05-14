@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_corner_layout"
+    android:padding="20dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp"
+    app:contentPadding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_16sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your phonenumber"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:lineSpacingExtra="5dp"
+
+            android:text="@string/text_descriptions"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="2dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false"
+            app:contentPaddingTop="2dp">
+
+            <EditText
+                android:id="@+id/phone_number"
+                android:gravity="center"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:drawableStart="@drawable/ic_round_smartphone_24"
+                android:drawablePadding="@dimen/_16sdp"
+
+                android:hint="+23490664459"
+                android:inputType="phone"
+                android:paddingEnd="@dimen/_16sdp"
+                android:paddingStart="@dimen/_16sdp"
+                android:drawableTint="@color/grey"
+                android:letterSpacing="0.2"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alertCustomCloseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_white_corner_button"
+
+            android:text="Continue"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</RelativeLayout>

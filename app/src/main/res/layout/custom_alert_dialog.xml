@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="10dp"
+    android:background="@drawable/round_corner_layout"
+    android:padding="20dp"
+    app:contentPadding="20dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_round_warning_24"
+            tools:srcCompact="@drawable/ic_round_warning_24"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:text="Error Notice"
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/errorMessage"
+            android:lineSpacingMultiplier="1.2"
+            android:textSize="15sp"
+            android:gravity="center_horizontal"
+            android:text="Text contents provided"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="Close Window"
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_white_corner_button"
+            android:id="@+id/alertCustomCloseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

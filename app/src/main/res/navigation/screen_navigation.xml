@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_navigation"
+    app:startDestination="@id/dashboardFragment">
+
+<!--    <fragment-->
+<!--        android:id="@+id/homeDashboardFragment"-->
+<!--        android:name="com.zeoharlem.append.xtremecardz.HomeDashboardFragment"-->
+<!--        android:label="fragment_home_dashboard"-->
+<!--        tools:layout="@layout/fragment_home_dashboard" />-->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.zeoharlem.append.xtremecardz.ui.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_profileFormFragment"
+            app:destination="@id/profileFormFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFormFragment"
+        android:name="com.zeoharlem.append.xtremecardz.ui.ProfileFormFragment"
+        android:label="fragment_profile_form"
+        tools:layout="@layout/fragment_profile_form" >
+        <argument
+            android:name="card_type"
+            app:argType="string"
+            android:defaultValue="id card" />
+    </fragment>
+    <activity
+        android:id="@+id/photoCamera"
+        android:name="com.zeoharlem.append.xtremecardz.PhotoCamera"
+        android:label="activity_photo_camera"
+        tools:layout="@layout/activity_photo_camera" />
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.zeoharlem.append.xtremecardz.ui.ProjectsFragment"
+        android:label="fragment_projects"
+        tools:layout="@layout/fragment_projects" />
+</navigation>

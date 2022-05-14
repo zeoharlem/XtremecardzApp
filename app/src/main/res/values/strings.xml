@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Xtremecardz</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Creators</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="demo_text_custom_alert">We are working at the back to get this solved. Kindly hold on or try again\n
+    There is a network problem we are working behind to get it fix
+    </string>
+    <string name="click_camera_open">Click Camera Open</string>
+    <string name="collection_images">Collection Images</string>
+    <string name="text_descriptions">here rounded corners show normally with your code. My test phone is Android 7.1. so I think you should clear the cache of your phone and install this app again. or maybe you should increase the value of</string>
+    <string name="barter_category">Barter Category</string>
+    <string-array name="swop_categories">
+        <item>Mens Fashion</item>
+        <item>Womens Fashion</item>
+        <item>Childrens Fashion</item>
+        <item>Computer</item>
+        <item>Automobiles</item>
+        <item>Estate Housing</item>
+    </string-array>
+    <string name="lorem">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		In mollis est vitae erat laoreet consectetur. Mauris dui mauris,
+		dictum vel egestas vel, porta sed ante. Phasellus congue viverra ipsum,
+		in elementum arcu ultricies nec.Morbi tincidunt nisl lacinia, placerat nisi eget, luctus tortor.
+		Morbi efficitur dictum leo, sit amet volutpat lorem sodales nec. Quisque et erat et turpis fringilla condimentum.
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor vulputate libero vitae iaculis.
+		Curabitur id blandit quam. Praesent massa ante, pulvinar vitae sagittis commodo, scelerisque porttitor eros.
+		Mauris suscipit a enim nec congue. Mauris tristique cursus aliquet. Nunc quis hendrerit nunc. Praesent tristique tellus purus,
+		a pretium ex gravida id. Cras laoreet malesuada nulla, at bibendum metus ultricies a. Fusce eu ornare arcu. Proin ut molestie est.
+		Vestibulum quis vehicula erat. Nam sed tempus nibh. Sed tortor ante, maximus venenatis odio sed, ultricies maximus lectus.
+		Aliquam sed volutpat ligula. Integer bibendum, magna ac lacinia suscipit,
+		risus libero rutrum justo, sed tempus augue tellus eget est. Curabitur convallis augue nisl,
+		id efficitur urna posuere faucibus. Ut sed egestas nulla, eu finibus metus. Nunc a arcu ante.
+		Aenean ullamcorper dolor non condimentum congue. Aenean mauris nunc, pellentesque at placerat vitae,
+		aliquet quis orci. Curabitur maximus augue ut bibendum sagittis.
+	</string>
+    <string name="default_notification_channel_id">151177381840</string>
+    <string name="accept_call">Accept</string>
+    <string name="decline_call">Decline</string>
+    <string name="incoming_call">Incoming Call</string>
+    <string name="fcm_post_url">https://fcm.googleapis.com/fcm/send</string>
+    <string name="fcm_server_key">AAAAIzLfx9A:APA91bF7wjD7e_gqwosp1tL0WX_VYBp8kII_VWoU6LllnttS87rkGFKBhsOjW6nnDbEnQIdSqKtJEIXlDiFNZAbGoJv8f9HMjHkIFmxJosaGIEm53pXq7B8aQVj5WickZjXazGmEGRhF</string>
+    <string name="exchange_with">Exchange With</string>
+    <string name="finish_page">Finish</string>
+    <string name="app_label">Swapit</string>
+    <string name="search_hint">Search Items</string>
+    <string name="clear_selection">Clear Selection</string>
+    <string name="open_camera_view">Open Camera View</string>
+    <string name="turn_location_on">Turn Location On</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="please_enter">Please enter info to create an account</string>
+    <string name="required">required</string>
+    <string name="apply_for_exchange">Apply for Exchange</string>
+    <string name="booster">With our booster package your items will be given preference in search results and you will also enjoy automated peer to peer service. Make people to quickly know about your upload</string>
+    <string name="not_available">Not available yet</string>
+    <string name="webclient_id">697706441523-jnf249p1fidqh7cvbv4e3r5nlu0ocdkg.apps.googleusercontent.com</string>
+    <!--    <string name="webclient_id">697706441523-uc5u52l1l3c10phon28pomcgiqf520us.apps.googleusercontent.com</string>-->
+</resources>

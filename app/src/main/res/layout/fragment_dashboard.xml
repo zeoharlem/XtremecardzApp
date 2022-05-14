@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DashboardFragment">
+
+
+    <LinearLayout
+        android:id="@+id/layout_call_carrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_design_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_white_corner_button"
+            android:drawableEnd="@drawable/ic_round_arrow_forward_24"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/black"
+            android:fontFamily="@font/montserratsemibold"
+            android:padding="20dp"
+            android:text="Request Design (ID Card)"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_buz_design"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_white_corner_button"
+            android:drawableEnd="@drawable/ic_baseline_credit_card_24"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/black"
+            android:fontFamily="@font/montserratsemibold"
+            android:padding="20dp"
+            android:text="Request Design (Buz Card)"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/templateDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_white_corner_button"
+            android:drawableEnd="@drawable/ic_baseline_search_24"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/grey"
+            android:fontFamily="@font/montserratsemibold"
+            android:padding="20dp"
+            android:enabled="false"
+            android:text="Select Template Design"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/my_request_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_white_corner_button"
+            android:drawableEnd="@drawable/ic_round_verified_user_24"
+            android:drawablePadding="20dp"
+            android:enabled="false"
+            android:drawableTint="@color/grey"
+            android:fontFamily="@font/montserratsemibold"
+            android:padding="20dp"
+            android:clickable="false"
+            android:text="My Requested Projects"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_white_corner_button"
+            android:drawableEnd="@drawable/ic_baseline_lock_open_24"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/black"
+            android:fontFamily="@font/montserratblack"
+            android:padding="20dp"
+            android:text="Sign Out"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

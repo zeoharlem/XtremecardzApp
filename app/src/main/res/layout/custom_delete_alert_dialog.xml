@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/round_corner_layout"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp">
+
+    <FrameLayout
+        android:id="@+id/frame_layout_delete_alert"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/display_image_offer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="-10dp"
+            android:layout_marginBottom="-10dp"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:id="@+id/close_window"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_close_black_24"
+             />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frame_layout_delete_alert"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:contentPadding="20dp">
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:gravity="center_horizontal"
+            android:lineSpacingMultiplier="1.2"
+            android:text="@string/demo_text_custom_alert"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white_corner_button"
+
+            android:text="Delete Image"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</RelativeLayout>
