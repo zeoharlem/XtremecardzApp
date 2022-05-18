@@ -18,6 +18,10 @@ import com.zeoharlem.append.xtremecardz.databinding.FragmentCameraBottomSheetBin
 import com.zeoharlem.append.xtremecardz.models.CapturedImage
 import com.zeoharlem.append.xtremecardz.models.Profile
 import ng.com.zeoharlem.swopit.utils.MyCustomExtUtils.capitalizeWords
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 class CameraBottomSheetDialog: BottomSheetDialogFragment() {
 
@@ -62,6 +66,8 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
         binding.cardType.text       = profileForm?.cardType?.capitalizeWords()
         binding.profileImage.setImageURI(capturedImageData.capturedItem)
 
+        submitVettedForm()
+
     }
 
     override fun onStart() {
@@ -87,6 +93,37 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
             }
         }
         return dialog
+    }
+
+    private fun submitVettedForm(){
+        binding.submitProofRead.setOnClickListener {
+            Toast.makeText(requireContext(), profileForm.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun getFormFields(): HashMap<String, String>{
+        val formatForm  = HashMap<String, String>()
+        formatForm["fullname"]  = profileForm!!.fullname
+        formatForm["email"]         = profileForm!!.email
+        formatForm["company_name"]  = profileForm!!.companyName
+        formatForm["website_link"]  = profileForm!!.websiteLink!!
+        formatForm["designation"]   = profileForm!!.designation
+        formatForm["phone_number"]  = profileForm!!.phone
+        formatForm["back_content"]  = profileForm!!.backContentDesc
+        formatForm["company_address"]   = profileForm!!.companyAddress
+        formatForm["card_number"]   = profileForm!!.cardNumbers!!
+        return formatForm
+    }
+
+    private fun submitFormAction(){
+        val file    = File(capturedImageData.filePath)
+        val requestBody: RequestBody = RequestBody.create(
+            MediaType.parse("image/*"),
+            file
+        )
+        val propertyImagePart: MultipartBody.Part   = MultipartBody.Part.createFormData(
+            "barter_image", file.name, requestBody
+        )
     }
 
     private fun setFullHeightState(bottomSheet: View){

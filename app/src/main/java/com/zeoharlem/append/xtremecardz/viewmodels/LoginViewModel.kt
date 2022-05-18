@@ -58,8 +58,8 @@ class LoginViewModel @Inject constructor(private val repository: AuthenticityRep
         _authState.value    = AuthState.Loading()
         try {
             mAuth.createUserWithEmailAndPassword(
-                userSimpleAccount.email,
-                userSimpleAccount.password
+                userSimpleAccount.email!!,
+                userSimpleAccount.password!!
             ).addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     mAuth.currentUser!!.sendEmailVerification()

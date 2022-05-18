@@ -104,9 +104,10 @@ class AuthenticityRepository @Inject constructor(private val application: Applic
         }
     }
 
+    //higher function order
     fun resetPropertiesAction(isLogged: (Boolean) -> Unit){
         userLoggedMutableLiveData.value = false
-        isLogged(userLoggedMutableLiveData.value!!)
+        isLogged.invoke(userLoggedMutableLiveData.value!!)
     }
 
 }

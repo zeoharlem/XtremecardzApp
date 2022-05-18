@@ -20,16 +20,18 @@
             android:src="@drawable/ic_round_warning_24"
             tools:srcCompact="@drawable/ic_round_warning_24"
             android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            app:tint="@color/grey" />
 
         <TextView
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"
-            android:text="Error Notice"
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="17dp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/montserratsemibold"
+            android:text="Alert Notice"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_marginBottom="20dp"
@@ -37,6 +39,7 @@
             android:id="@+id/errorMessage"
             android:lineSpacingMultiplier="1.2"
             android:textSize="15sp"
+            android:fontFamily="@font/montserratregular"
             android:gravity="center_horizontal"
             android:text="Text contents provided"
             android:layout_width="match_parent"
@@ -45,6 +48,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:text="Close Window"
             android:textColor="@color/black"
+            android:fontFamily="@font/montserratblack"
             android:background="@drawable/rounded_white_corner_button"
             android:id="@+id/alertCustomCloseBtn"
             android:layout_width="match_parent"

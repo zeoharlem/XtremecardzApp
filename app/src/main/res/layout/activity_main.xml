@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
         android:paddingEnd="20dp"
-        android:layout_marginTop="@dimen/_30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

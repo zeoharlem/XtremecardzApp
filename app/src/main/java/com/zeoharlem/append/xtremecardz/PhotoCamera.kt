@@ -330,7 +330,7 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
                 val bitmap  = imageProxyToBitmap(image)
                 val uri     = saveImage(bitmap, this@PhotoCamera, "xc")
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ByteArrayOutputStream())
-                capturedImageData   = CapturedImage(uri)
+                capturedImageData   = CapturedImage(uri, uri!!.path!!)
                 photoCameraBinding.imageCaptured.setImageBitmap(bitmap)
                 capturedUriImages.add(uri!!.path!!)
                 //Close Image Object Before Acquiring a new onw

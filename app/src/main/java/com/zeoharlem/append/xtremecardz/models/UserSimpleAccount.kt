@@ -7,15 +7,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UserSimpleAccount(
     @SerializedName("firstname")
-    val firstName: String,
+    val firstName: String? = null,
     @SerializedName("lastname")
-    val lastName: String,
+    val lastName: String? = null,
     @SerializedName("email")
-    val email: String,
+    val email: String? = null,
     @SerializedName("password")
-    val password: String,
+    val password: String? = null,
     @SerializedName("phonenumber")
-    val phoneNumber: String,
+    val phoneNumber: String? = null,
     @SerializedName("uid")
-    val uid: String
+    val uid: String? = null
 ): Parcelable

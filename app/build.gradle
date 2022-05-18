@@ -135,4 +135,7 @@ dependencies {
 
     // cropping images
     implementation 'com.github.CanHub:Android-Image-Cropper:4.2.1'
+
+    //PreferenceManager
+    implementation 'androidx.preference:preference-ktx:1.2.0'
 }

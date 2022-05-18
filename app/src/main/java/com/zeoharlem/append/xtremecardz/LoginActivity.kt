@@ -1,5 +1,6 @@
 package com.zeoharlem.append.xtremecardz
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.wajahatkarim3.easyvalidation.core.collection_ktx.nonEmptyList
 import com.zeoharlem.append.xtremecardz.databinding.ActivityLoginBinding
+import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils
 import com.zeoharlem.append.xtremecardz.viewmodels.LoginViewModel
 import com.zeoharlem.autonowartisans.sealed.AuthState
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInClient      = GoogleSignIn.getClient(applicationContext, googleSignOptions)
 
+        //Call using email and password
+        loginWithEmailPasswordAction()
+
+        //called for the google button view
         binding.googleSignIn.setOnClickListener {
             loginUsingGoogleSignInApplication()
         }
@@ -118,21 +124,25 @@ class LoginActivity : AppCompatActivity() {
             catch (e: ApiException) {
                 Log.e("HomeDashboard", "signIn: ${e.localizedMessage}")
                 e.message?.let {
-                    customAlertDialog("Google sign in error", it)
+                    XtremeCardzUtils.customAlertDialog("Google sign in error: " +
+                            e.localizedMessage, Dialog(this)
+                    )
                 }
             }
         }
         else{
             Log.e("HomeDashboard", "Result $result")
-            customAlertDialog("Error response", "Seems no data was " +
-                    "returned or check your internet connection")
+            XtremeCardzUtils.customAlertDialog("Seems no data was " +
+                    "returned or check your internet connection", Dialog(this))
         }
     }
 
     override fun onStart() {
         super.onStart()
-        if(loginViewModel!!.getMyFirebaseAuth()!!.currentUser != null)
+        val currentUser = loginViewModel?.getMyFirebaseAuth()?.currentUser
+        if(currentUser != null && currentUser.isEmailVerified){
             startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun customAlertDialog(title: String, message: String){
