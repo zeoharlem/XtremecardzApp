@@ -36,6 +36,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.ViewModelProvider
 import coil.clear
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
@@ -53,12 +54,15 @@ import com.zeoharlem.append.xtremecardz.models.CapturedImage
 import com.zeoharlem.append.xtremecardz.models.HotDeals
 import com.zeoharlem.append.xtremecardz.models.Profile
 import com.zeoharlem.append.xtremecardz.ui.activities.CropUploadFormActivity
+import com.zeoharlem.append.xtremecardz.viewmodels.PhotoCameraViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
 import java.io.File.separator
 import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 @SuppressLint("LogNotTimber")
 class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListener {
 
@@ -68,6 +72,7 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
     private var imageCapture: ImageCapture? = null
     private lateinit var capturedImages: ArrayList<CapturedImage>
     private lateinit var photoCameraBinding: ActivityPhotoCameraBinding
+    private lateinit var photoCameraViewModel: PhotoCameraViewModel
     private lateinit var cameraExecutors: ExecutorService
     private lateinit var capturedImageData: CapturedImage
     private lateinit var capturedImageAdapter: CapturedImageAdapters
@@ -102,6 +107,8 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        photoCameraViewModel= ViewModelProvider(this)[PhotoCameraViewModel::class.java]
 
         cameraExecutors     = Executors.newSingleThreadExecutor()
         capturedImages      = ArrayList<CapturedImage>()

@@ -21,26 +21,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <ImageView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/_26sdp"
-            android:fontFamily="@font/montserratblack"
-            android:text="Xtremecardz"
-            android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:contentDescription="@string/app_label"
+            android:src="@drawable/xtremecardz" />
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:layout_marginBottom="@dimen/_26sdp"-->
+        <!--            android:fontFamily="@font/montserratblack"-->
+        <!--            android:text="Xtremecardz"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="40sp" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_title"
             style="@style/OutlinedRoundedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
             android:fontFamily="@font/montserratblack"
-            app:expandedHintEnabled="false"
+            android:hint="Email"
             app:errorEnabled="true"
             app:errorTextAppearance="@font/montserratblack"
+            app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -51,6 +59,7 @@
                 android:layout_marginTop="20dp"
                 android:drawableEnd="@drawable/ic_outline_email_24"
                 android:drawablePadding="8dp"
+                android:fontFamily="@font/montserratregular"
                 android:gravity="center_vertical"
                 android:hint="zeoharlem@xtremecardz.com"
                 android:inputType="textEmailAddress"
@@ -59,7 +68,6 @@
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
                 android:textColorHint="@color/grey"
-                android:fontFamily="@font/montserratregular"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,10 +77,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:hint="Password"
-            app:expandedHintEnabled="false"
-            app:errorEnabled="true"
             android:fontFamily="@font/montserratblack"
+            android:hint="Password"
+            app:errorEnabled="true"
+            app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:passwordToggleEnabled="true"
@@ -85,6 +93,7 @@
                 android:layout_marginTop="20dp"
                 android:drawableEnd="@drawable/ic_round_edit_24"
                 android:drawablePadding="8dp"
+                android:fontFamily="@font/montserratregular"
                 android:gravity="center_vertical"
                 android:inputType="textPassword"
                 android:paddingStart="15dp"
@@ -93,7 +102,6 @@
                 android:paddingBottom="10dp"
                 android:singleLine="true"
                 android:text="admin12345"
-                android:fontFamily="@font/montserratregular"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,9 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/montserratregular"
                 android:gravity="end"
                 android:padding="5dp"
-                android:fontFamily="@font/montserratregular"
                 android:text="Forgot Password?"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
@@ -123,12 +131,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:letterSpacing="0"
-            android:padding="3dp"
-            android:text="Email Sign In"
             android:background="@drawable/rounded_corner_button"
             android:drawablePadding="20dp"
             android:fontFamily="@font/montserratblack"
+            android:letterSpacing="0"
+            android:padding="3dp"
+            android:text="Email Sign In"
             android:textColor="@color/white"
             android:textSize="17sp" />
 
@@ -138,12 +146,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_white_corner_button"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/montserratblack"
             android:letterSpacing="0"
             android:padding="3dp"
             android:text="Google Sign In"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/montserratblack"
-            android:drawableTint="@color/white"
             android:textSize="17sp" />
 
 
@@ -161,12 +169,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:drawablePadding="20dp"
                 android:focusable="true"
+                android:fontFamily="@font/montserratregular"
                 android:gravity="end"
                 android:padding="5dp"
                 android:text="Don't have an account?"
-                android:drawablePadding="20dp"
-                android:fontFamily="@font/montserratregular"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
 
@@ -178,9 +186,9 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/montserratblack"
                 android:padding="5dp"
                 android:text="Sign Up"
-                android:fontFamily="@font/montserratblack"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
         </LinearLayout>

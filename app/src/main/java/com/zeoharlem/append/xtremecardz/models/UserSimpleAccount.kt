@@ -17,5 +17,9 @@ data class UserSimpleAccount(
     @SerializedName("phonenumber")
     val phoneNumber: String? = null,
     @SerializedName("uid")
-    val uid: String? = null
+    val uid: String? = null,
+    @SerializedName("token")
+    val token: String? = null,
+    @SerializedName("_id")
+    val id: String? = null
 ): Parcelable

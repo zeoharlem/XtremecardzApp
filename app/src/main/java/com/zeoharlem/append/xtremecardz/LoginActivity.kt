@@ -19,9 +19,10 @@ import com.wajahatkarim3.easyvalidation.core.collection_ktx.nonEmptyList
 import com.zeoharlem.append.xtremecardz.databinding.ActivityLoginBinding
 import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils
 import com.zeoharlem.append.xtremecardz.viewmodels.LoginViewModel
-import com.zeoharlem.autonowartisans.sealed.AuthState
+import com.zeoharlem.append.xtremecardz.sealed.AuthState
+import com.zeoharlem.append.xtremecardz.sealed.NetworkResults
+import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.observeOnceAfterInit
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -57,6 +58,9 @@ class LoginActivity : AppCompatActivity() {
             loginUsingGoogleSignInApplication()
         }
 
+        //Get generated token from server
+        setClientGeneratedToken()
+
         loginViewModel!!.getAuthStateRepository().observe(this){
             when(it){
                 is AuthState.Loading -> {
@@ -86,6 +90,22 @@ class LoginActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    private fun setClientGeneratedToken(){
+        loginViewModel!!.getAuthRepository().loginNetworkResults.observe(this){ network ->
+            when(network){
+                is NetworkResults.Loading -> Toast.makeText(
+                    applicationContext,
+                    "Setting Token",
+                    Toast.LENGTH_SHORT
+                ).show()
+                is NetworkResults.Success -> network.dataSource?.token?.let {
+                    XtremeCardzUtils.saveKey("token", it, applicationContext)
+                }
+                is NetworkResults.Error -> Toast.makeText(applicationContext, network.message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     private fun loginWithEmailPasswordAction(){
         binding.loginBtn.setOnClickListener {
             val nonEmptyAction  = nonEmptyList(
@@ -105,6 +125,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginInUsingEmailPasswordApplication(){
+        val queryMap        = HashMap<String, String>()
+        queryMap["email"]   = binding.loginEmailid.text.toString().trim()
+        queryMap["password"]= binding.loginPassword.text.toString().trim()
+
+        lifecycleScope.launch {
+            loginViewModel?.getAuthRepository()?.login(queryMap)
+        }
         loginViewModel?.signIn(
             binding.loginEmailid.text.toString().trim(),
             binding.loginPassword.text.toString().trim()
@@ -119,6 +146,15 @@ class LoginActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
+
+                val queryMap    = HashMap<String, String>()
+                queryMap["email"]       = account.email.toString()
+                queryMap["fullname"]    = account.displayName.toString()
+                queryMap["password"]    = "password"
+
+                lifecycleScope.launch {
+                    loginViewModel?.registerUserSilently(queryMap)
+                }
                 loginViewModel?.signInGoogle(account.idToken!!)
             }
             catch (e: ApiException) {

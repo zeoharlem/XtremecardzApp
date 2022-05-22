@@ -1,4 +1,4 @@
-package com.zeoharlem.autonowartisans.sealed
+package com.zeoharlem.append.xtremecardz.sealed
 
 sealed class NetworkResults<T>(val dataSource: T? = null, val message: String? = null) {
     class Success<T>(dataSource: T?): NetworkResults<T>(dataSource)

@@ -1,4 +1,4 @@
-package com.zeoharlem.autonowartisans.sealed
+package com.zeoharlem.append.xtremecardz.sealed
 
 sealed class AuthState<T>(val dataSource: T? = null, val message: String? = null) {
     class Idle<T>: AuthState<T>()

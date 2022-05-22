@@ -1,4 +1,4 @@
-package ng.com.zeoharlem.swopit.utils
+package com.zeoharlem.append.xtremecardz.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

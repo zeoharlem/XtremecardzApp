@@ -1,4 +1,4 @@
-package ng.com.zeoharlem.swopit.utils
+package com.zeoharlem.append.xtremecardz.utils
 
 sealed class NetworkResults<T>(val dataSource: T? = null, val message: String? = null) {
 

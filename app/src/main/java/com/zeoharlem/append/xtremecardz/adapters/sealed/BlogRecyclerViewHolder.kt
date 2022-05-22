@@ -8,8 +8,8 @@ import com.zeoharlem.append.xtremecardz.databinding.BlogComplexViewBinding
 import com.zeoharlem.append.xtremecardz.databinding.BlogHeaderItemBinding
 import com.zeoharlem.append.xtremecardz.databinding.BlogSimpleViewBinding
 import com.zeoharlem.append.xtremecardz.models.sealed.BlogRecyclerViewSealed
-import ng.com.zeoharlem.swopit.utils.MyCustomExtUtils.capitalizeWords
-import ng.com.zeoharlem.swopit.utils.TrackingUtility
+import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.capitalizeWords
+import com.zeoharlem.append.xtremecardz.utils.TrackingUtility
 
 sealed class BlogRecyclerViewHolder(binding: ViewBinding): RecyclerView.ViewHolder(binding.root){
 

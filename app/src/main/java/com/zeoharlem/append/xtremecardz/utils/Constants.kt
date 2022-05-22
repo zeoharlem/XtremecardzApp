@@ -3,7 +3,8 @@ package com.zeoharlem.append.xtremecardz.utils
 class Constants {
     companion object{
         const val QUERY     = "q"
-        const val BASE_URL  = "https://cr8.com.ng/swopitapiv1/"
+        const val BASE_URL  = "http://192.168.0.112:3000/api/"
+//        const val BASE_URL  = "https://cr8.com.ng/swopitapiv1/"
         const val GOOGLE_BASE_URL   = "https://fcm.googleapis.com/"
         const val API_KEY   = "tkQ03VCcziNtG5qmrh1cKXKQDEEkqojUGnL7tYgW"
 //        const val WEB_KEY   = (R.string.web_key).toString()

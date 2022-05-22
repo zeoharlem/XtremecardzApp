@@ -4,31 +4,49 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.WorkerThread
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.zeoharlem.append.xtremecardz.MainActivity
 import com.zeoharlem.append.xtremecardz.databinding.FragmentCameraBottomSheetBinding
 import com.zeoharlem.append.xtremecardz.models.CapturedImage
 import com.zeoharlem.append.xtremecardz.models.Profile
-import ng.com.zeoharlem.swopit.utils.MyCustomExtUtils.capitalizeWords
+import com.zeoharlem.append.xtremecardz.sealed.NetworkResults
+import com.zeoharlem.append.xtremecardz.utils.Constants
+import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.capitalizeWords
+import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils
+import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils.createPartFromString
+import com.zeoharlem.append.xtremecardz.viewmodels.PhotoCameraViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
+@AndroidEntryPoint
 class CameraBottomSheetDialog: BottomSheetDialogFragment() {
 
     private var _binding: FragmentCameraBottomSheetBinding? = null
     private lateinit var capturedImageData: CapturedImage
     private var profileForm: Profile? = null
     private val binding get() = _binding!!
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val photoViewModel by activityViewModels<PhotoCameraViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +64,39 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
         startWhatsAppAction()
         setDirectCallAction()
 
+        photoViewModel.submitResponseBody.observe(viewLifecycleOwner){ networkResult ->
+            when(networkResult){
+                is NetworkResults.Loading -> {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please wait loading...",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.submitProofRead.isEnabled   = false
+                    binding.submitProofRead.text        = "Processing. Please Wait!"
+                }
+                is NetworkResults.Success -> {
+                    Toast.makeText(
+                        requireContext(),
+                        networkResult.dataSource.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val message = "Processing Completed. Your data has been sent and you will be contacted shortly"
+                    XtremeCardzUtils.customAlertDialog(Dialog(requireContext()), message) {
+                        startActivity(Intent(requireContext(), MainActivity::class.java))
+                        requireActivity().finish()
+                    }
+                }
+                is NetworkResults.Error -> {
+                    Log.e(
+                        "CameraBottomSheet",
+                        "onCreateView: ${networkResult.message}"
+                    )
+                    binding.submitProofRead.isEnabled   = true
+                    binding.submitProofRead.text        = "Submit Now"
+                }
+            }
+        }
         return binding.root
     }
 
@@ -97,7 +148,20 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
 
     private fun submitVettedForm(){
         binding.submitProofRead.setOnClickListener {
-            Toast.makeText(requireContext(), profileForm.toString(), Toast.LENGTH_SHORT).show()
+            capturedImageData.capturedItem?.let { imageUri ->
+                //val convertedImage  = convertUriToBitmap(imageUri)
+                Log.e("CameraBottom", "submitVettedForm: imageurl call", )
+                XtremeCardzUtils.readKey("token", requireContext())?.let { token ->
+                    photoViewModel.submitProjectInfoAction(
+                        "Bearer $token",
+                        requestBodyQueries(),
+                        setUpImageUploadFileTask(capturedImageData.filePath)
+                    )
+                    Log.e("CameraBottom", "Call Queries ${requestBodyQueries()}", )
+                }
+                Toast.makeText(requireContext(), "image: ${imageUri.path}" +
+                        " string: ${capturedImageData.filePath}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -162,5 +226,46 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
             }
         }
 
+    }
+
+    @WorkerThread
+    private fun convertUriToBitmap(imageUri: Uri): Bitmap? {
+        var bitmap: Bitmap? = null
+        try{
+            bitmap  = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+                ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver,imageUri))
+            }
+            else{
+                MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
+            }
+        }
+        catch (e: Exception){
+            Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+        return bitmap
+    }
+
+    private fun requestBodyQueries(): HashMap<String, RequestBody> {
+        val partQueriesBody: HashMap<String, RequestBody>   = HashMap()
+        partQueriesBody["apiKey"]       = createPartFromString(Constants.API_KEY)
+        partQueriesBody["reference"]    = createPartFromString(XtremeCardzUtils.randomKeyString(15))
+        partQueriesBody["fullname"]     = createPartFromString(profileForm!!.fullname)
+        partQueriesBody["email"]         = createPartFromString(profileForm!!.email)
+        partQueriesBody["company_name"]  = createPartFromString(profileForm!!.companyName)
+        partQueriesBody["website_link"]  = createPartFromString(profileForm!!.websiteLink!!)
+        partQueriesBody["designation"]   = createPartFromString(profileForm!!.designation)
+        partQueriesBody["phone_number"]  = createPartFromString(profileForm!!.phone)
+        partQueriesBody["back_content"]  = createPartFromString(profileForm!!.backContentDesc)
+        partQueriesBody["company_address"]   = createPartFromString(profileForm!!.companyAddress)
+        partQueriesBody["number_of_cards"]   = createPartFromString(profileForm!!.cardNumbers!!)
+        partQueriesBody["uid"]          = createPartFromString(mAuth.currentUser!!.uid)
+        //partQueriesBody["id"]   = createPartFromString(XtremeCardzUtils.readKey("id", requireContext())!!)
+        return partQueriesBody
+    }
+
+    private fun setUpImageUploadFileTask(filePath: String): MultipartBody.Part {
+        val file                        = File(filePath)
+        val requestBody: RequestBody    = RequestBody.create(MediaType.parse("image/*"), file)
+        return MultipartBody.Part.createFormData("xtreme_image", file.name, requestBody)
     }
 }

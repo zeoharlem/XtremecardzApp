@@ -12,12 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.wajahatkarim3.easyvalidation.core.collection_ktx.nonEmptyList
 import com.zeoharlem.append.xtremecardz.PhotoCamera
-import com.zeoharlem.append.xtremecardz.R
-import com.zeoharlem.append.xtremecardz.databinding.FragmentDashboardBinding
 import com.zeoharlem.append.xtremecardz.databinding.FragmentProfileFormBinding
 import com.zeoharlem.append.xtremecardz.models.Profile
 import com.zeoharlem.append.xtremecardz.viewmodels.LoginViewModel
-import ng.com.zeoharlem.swopit.utils.MyCustomExtUtils.capitalizeWords
+import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.capitalizeWords
 
 class ProfileFormFragment : Fragment() {
 

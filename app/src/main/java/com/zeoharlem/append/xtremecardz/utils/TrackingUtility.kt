@@ -1,13 +1,12 @@
-package ng.com.zeoharlem.swopit.utils
+package com.zeoharlem.append.xtremecardz.utils
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Geocoder
 import android.location.LocationManager
 import android.text.format.DateUtils
 import android.util.Log
-import ng.com.zeoharlem.swopit.utils.MyCustomExtUtils.capitalizeWords
+import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.capitalizeWords
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -194,7 +193,9 @@ object TrackingUtility {
 
     fun getDistanceDiff(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val theta   = lon1 - lon2
-        var dist    = (sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + (cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(deg2rad(theta))))
+        var dist    = (sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + (cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(
+            deg2rad(theta)
+        )))
 
         dist        = acos(dist)
         dist        = rad2deg(dist)

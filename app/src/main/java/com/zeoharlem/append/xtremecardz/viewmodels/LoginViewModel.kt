@@ -3,18 +3,15 @@ package com.zeoharlem.append.xtremecardz.viewmodels
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.zeoharlem.append.xtremecardz.di.repository.AuthenticityRepository
 import com.zeoharlem.append.xtremecardz.models.UserSimpleAccount
-import com.zeoharlem.append.xtremecardz.di.repository.Repository
-import com.zeoharlem.autonowartisans.sealed.AuthState
-import com.zeoharlem.autonowartisans.sealed.NetworkResults
-import com.zeoharlem.autonowartisans.sealed.UiState
+import com.zeoharlem.append.xtremecardz.sealed.AuthState
+import com.zeoharlem.append.xtremecardz.sealed.NetworkResults
+import com.zeoharlem.append.xtremecardz.sealed.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -53,6 +50,8 @@ class LoginViewModel @Inject constructor(private val repository: AuthenticityRep
         return repository.getMyFirebaseAuth()
     }
 
+    fun getAuthRepository(): AuthenticityRepository = repository
+
     //Move to the Authenticity Repository
     fun signUp(userSimpleAccount: UserSimpleAccount){
         _authState.value    = AuthState.Loading()
@@ -66,6 +65,17 @@ class LoginViewModel @Inject constructor(private val repository: AuthenticityRep
                         .addOnCompleteListener { emailVerifyTask ->
                         if(emailVerifyTask.isSuccessful){
                             _authState.value    = AuthState.Success(true)
+
+                            val queryHashMap    = HashMap<String, String>()
+                            queryHashMap["firstname"]   = userSimpleAccount.firstName.toString()
+                            queryHashMap["lastname"]    = userSimpleAccount.lastName.toString()
+                            queryHashMap["email"]       = userSimpleAccount.email.toString()
+                            queryHashMap["password"]    = userSimpleAccount.password.toString()
+
+                            viewModelScope.launch {
+                                registerUserSilently(queryHashMap)
+                                Log.e("LoginViewModel", "signUp: ${repository.networkResults.value}", )
+                            }
                         }
                     }
                 }
@@ -79,6 +89,10 @@ class LoginViewModel @Inject constructor(private val repository: AuthenticityRep
         catch (e: ApiException){
             _authState.value    = AuthState.Error(e.localizedMessage)
         }
+    }
+
+    suspend fun registerUserSilently(query: HashMap<String, String>){
+        repository.registerUserSilently(query)
     }
 
     override fun onCleared() {

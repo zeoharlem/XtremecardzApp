@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -14,8 +15,9 @@ import com.zeoharlem.append.xtremecardz.databinding.ActivityRegisterBinding
 import com.zeoharlem.append.xtremecardz.models.UserSimpleAccount
 import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils
 import com.zeoharlem.append.xtremecardz.viewmodels.LoginViewModel
-import com.zeoharlem.autonowartisans.sealed.AuthState
+import com.zeoharlem.append.xtremecardz.sealed.AuthState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {

@@ -1,30 +1,18 @@
 package com.zeoharlem.append.xtremecardz
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.WindowManager
-import android.widget.EditText
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
-import com.wajahatkarim3.easyvalidation.core.collection_ktx.nonEmptyList
 import com.zeoharlem.append.xtremecardz.databinding.ActivityMainBinding
 import com.zeoharlem.append.xtremecardz.viewmodels.LoginViewModel
-import com.zeoharlem.autonowartisans.sealed.AuthState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

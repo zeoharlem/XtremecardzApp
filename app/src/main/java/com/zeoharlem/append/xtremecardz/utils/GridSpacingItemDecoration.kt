@@ -1,4 +1,4 @@
-package ng.com.zeoharlem.swopit.utils
+package com.zeoharlem.append.xtremecardz.utils
 
 import android.graphics.Rect
 import android.view.View

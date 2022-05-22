@@ -1,4 +1,4 @@
-package com.zeoharlem.autonowartisans.sealed
+package com.zeoharlem.append.xtremecardz.sealed
 
 sealed class UiState{
     object Loading : UiState()
