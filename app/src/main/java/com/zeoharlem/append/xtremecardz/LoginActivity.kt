@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val splashScreen    = installSplashScreen()
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -75,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
                 is AuthState.Error -> {
                     binding.googleSignIn.isEnabled  = true
                     binding.googleSignIn.text       = "Google Sign In"
+                    XtremeCardzUtils.customAlertDialog(it.message, Dialog(this))
                     Toast.makeText(applicationContext, "Error ${it.message}", Toast.LENGTH_LONG).show()
                 }
                 else -> {}
@@ -93,15 +96,21 @@ class LoginActivity : AppCompatActivity() {
     private fun setClientGeneratedToken(){
         loginViewModel!!.getAuthRepository().loginNetworkResults.observe(this){ network ->
             when(network){
-                is NetworkResults.Loading -> Toast.makeText(
-                    applicationContext,
-                    "Setting Token",
-                    Toast.LENGTH_SHORT
-                ).show()
-                is NetworkResults.Success -> network.dataSource?.token?.let {
-                    XtremeCardzUtils.saveKey("token", it, applicationContext)
+                is NetworkResults.Loading -> {
+                    Toast.makeText(applicationContext, "Please wait...", Toast.LENGTH_SHORT).show()
+                    binding.loginBtn.isEnabled  = false
                 }
-                is NetworkResults.Error -> Toast.makeText(applicationContext, network.message, Toast.LENGTH_LONG).show()
+                is NetworkResults.Success -> network.dataSource?.let {
+                    XtremeCardzUtils.saveKey("token", it.token!!, applicationContext)
+                    XtremeCardzUtils.saveKey("firstname", it.firstName!!, applicationContext)
+                    XtremeCardzUtils.saveKey("lastname", it.lastName!!, applicationContext)
+                    XtremeCardzUtils.saveKey("email", it.email!!, applicationContext)
+                    //startActivity(Intent(this, MainActivity::class.java))
+                }
+                is NetworkResults.Error -> {
+                    Toast.makeText(applicationContext, network.message, Toast.LENGTH_LONG).show()
+                    binding.loginBtn.isEnabled  = true
+                }
             }
         }
     }
@@ -138,7 +147,6 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
-
     private val getActivityForResult    = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == RESULT_OK){
             val data    = result.data
@@ -146,11 +154,16 @@ class LoginActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-
-                val queryMap    = HashMap<String, String>()
+                val splitFullname   = account.displayName.toString().split(" ")
+                val queryMap        = HashMap<String, String>()
                 queryMap["email"]       = account.email.toString()
-                queryMap["fullname"]    = account.displayName.toString()
+                queryMap["firstname"]   = splitFullname[0]
+                queryMap["lastname"]    = splitFullname[1]
                 queryMap["password"]    = "password"
+
+                XtremeCardzUtils.saveKey("firstname", splitFullname[0], applicationContext)
+                XtremeCardzUtils.saveKey("email", account.email.toString(), applicationContext)
+                XtremeCardzUtils.saveKey("lastname", splitFullname[1], applicationContext)
 
                 lifecycleScope.launch {
                     loginViewModel?.registerUserSilently(queryMap)
@@ -176,8 +189,17 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = loginViewModel?.getMyFirebaseAuth()?.currentUser
+        if(XtremeCardzUtils.readKey("firstname", applicationContext)?.isEmpty() == true ||
+            XtremeCardzUtils.readKey("email", applicationContext)?.isEmpty() == true){
+            return
+        }
         if(currentUser != null && currentUser.isEmailVerified){
-            startActivity(Intent(this, MainActivity::class.java))
+            val queryMap        = HashMap<String, String>()
+            queryMap["email"]   = currentUser.email.toString()
+            queryMap["password"]= "password"
+            lifecycleScope.launch {
+                loginViewModel?.getAuthRepository()?.login(queryMap)
+            }
         }
     }
 

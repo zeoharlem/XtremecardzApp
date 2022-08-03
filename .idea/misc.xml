@@ -3,33 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/button_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/custom_fab_background.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/fab_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/profile_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_white_corner_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_crop_upload_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_photo_camera.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/blog_complex_view.xml" value="0.14476190476190476" />
         <entry key="app/src/main/res/layout/blog_simple_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_alert_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_alert_phone_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_alert_two_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_delete_alert_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_upload_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/first_container.xml" value="0.4329268292682927" />
         <entry key="app/src/main/res/layout/former.xml" value="0.1396088019559902" />
+        <entry key="app/src/main/res/layout/fragment_activate_account.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/fragment_camera_bottom_sheet.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/fragment_home_dashboard.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_open_content.xml" value="0.46296296296296297" />
         <entry key="app/src/main/res/layout/fragment_profile_form.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/fragment_projects.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/fragment_upload_bottom_sheet.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_upload_zip.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/fragment_view_projects.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/home_category_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/image_container.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/item_image_captured.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/project_item_row.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/project_view_item.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/second_container.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/third_container.xml" value="0.1" />
         <entry key="app/src/main/res/menu/barter_details_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/flash_nav.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/search_menu.xml" value="0.5" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

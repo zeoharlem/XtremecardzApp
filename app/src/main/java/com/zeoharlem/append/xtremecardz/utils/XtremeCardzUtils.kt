@@ -1,14 +1,18 @@
 package com.zeoharlem.append.xtremecardz.utils
 
 import android.app.Dialog
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.provider.OpenableColumns
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.TextView
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -17,20 +21,24 @@ import com.zeoharlem.append.xtremecardz.R
 import kotlinx.coroutines.Runnable
 //import androidx.preference.PreferenceManager
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 
 object XtremeCardzUtils {
     //Create the RequestBody for the form
     fun createPartFromString(string: String): RequestBody {
-        return RequestBody.create(MultipartBody.FORM, string)
+        //return string.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        return string.toRequestBody(MultipartBody.FORM)
     }
 
     //Create the MultipartBody.Part for the image file to be uploaded
     fun prepareFilePart(partName: String, file: File): MultipartBody.Part {
-        val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
         return MultipartBody.Part.createFormData(partName, file.name, requestBody)
     }
 //
@@ -55,6 +63,48 @@ object XtremeCardzUtils {
     fun readKey(key: String, context: Context): String? {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getString(key, "")
+    }
+
+    fun Context.getFileName(uri: Uri): String? = when(uri.scheme) {
+        ContentResolver.SCHEME_CONTENT -> getContentFileName(uri)
+        else -> uri.path?.let(::File)?.name
+    }
+
+    fun getFileExtension(context: Context, uri: Uri): String?{
+        val fileType = context.contentResolver.getType(uri)
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType)
+    }
+
+    private fun Context.getContentFileName(uri: Uri): String? = runCatching {
+        contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            cursor.moveToFirst()
+            return@use cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME).let(cursor::getString)
+        }
+    }.getOrNull()
+
+    fun getFileSize(file: File): String {
+        val sizeKb = 1024.0f;
+        val sizeMb = sizeKb * sizeKb;
+        val sizeGb = sizeMb * sizeKb;
+        val sizeTerra = sizeGb * sizeKb
+        if(file.length() < sizeMb)
+            return "${file.length() / sizeKb}  KB"
+        else if(file.length() < sizeGb)
+            return "${file.length() / sizeMb}  MB"
+        else if(file.length() < sizeTerra)
+            return "${file.length() / sizeGb}  GB"
+        return file.length().toString()
+    }
+
+    fun removeKey(key: String = "", context: Context){
+        if(key.isEmpty()){
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            sharedPreferences.edit().clear().apply()
+        }
+        else{
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            sharedPreferences.edit().remove(key).apply()
+        }
     }
 
     fun randomKeyString(length: Int): String {

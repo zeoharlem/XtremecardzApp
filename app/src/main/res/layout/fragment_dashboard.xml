@@ -1,115 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.DashboardFragment">
 
-
-    <LinearLayout
-        android:id="@+id/layout_call_carrier"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832">
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_30dp">
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit_design_request"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/home_pager_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_white_corner_button"
-            android:drawableEnd="@drawable/ic_round_arrow_forward_24"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/montserratsemibold"
-            android:padding="20dp"
-            android:text="Request Design (ID Card)"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:layout_marginTop="@dimen/_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_carrier" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit_buz_design"
+        <TextView
+            android:id="@+id/hello_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_white_corner_button"
-            android:drawableEnd="@drawable/ic_baseline_credit_card_24"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/montserratsemibold"
-            android:padding="20dp"
-            android:text="Request Design (Buz Card)"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/templateDesign"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_white_corner_button"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/grey"
-            android:fontFamily="@font/montserratsemibold"
-            android:padding="20dp"
-            android:enabled="false"
-            android:text="Select Template Design"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
+            android:layout_margin="@dimen/_10dp"
+            android:fontFamily="@font/nunitosemibold"
+            android:text="Welcome,"
             android:textColor="@color/grey"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/my_request_project"
+
+        <TextView
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_white_corner_button"
-            android:drawableEnd="@drawable/ic_round_verified_user_24"
-            android:drawablePadding="20dp"
-            android:enabled="false"
-            android:drawableTint="@color/grey"
-            android:fontFamily="@font/montserratsemibold"
-            android:padding="20dp"
-            android:clickable="false"
-            android:text="My Requested Projects"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/grey"
-            android:textSize="17sp" />
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:fontFamily="@font/nunitoblack"
+            android:text="Dereck Doyie"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hello_text" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sign_out"
+        <LinearLayout
+            android:id="@+id/linear_carrier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_white_corner_button"
-            android:drawableEnd="@drawable/ic_baseline_lock_open_24"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/montserratblack"
-            android:padding="20dp"
-            android:text="Sign Out"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/username">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:fontFamily="@font/nunitoregular"
+                android:text="johndoe@yahoo.co.uk"
+                android:textSize="13sp"
+                android:textColor="@color/grey"
+                android:id="@+id/email_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hello_text" />
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="37dp"-->
+<!--                android:backgroundTint="@color/purple_400"-->
+<!--                android:elevation="@dimen/_20dp"-->
+<!--                android:fontFamily="@font/montserratblack"-->
+<!--                android:text="Profile"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textAppearance="?attr/textAppearanceBody2"-->
+<!--                android:textSize="11sp"-->
+<!--                app:cornerRadius="@dimen/_20dp" />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_call_1_carrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_pager_slider">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/design_request"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/purple_700"
+                app:cardCornerRadius="@dimen/_10dp"
+                app:cardElevation="@dimen/_10dp"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/_15dp">
+
+                <ImageButton
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:backgroundTint="@color/purple_500"
+                    android:background="@drawable/rounded_corner_button"
+                    android:src="@drawable/ic_outline_browse_gallery_24"
+                    app:tint="@color/purple_100" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
 
 
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoblack"
+                        android:text="Design Request"
+                        android:textColor="@color/purple_100"
+                        android:textSize="17sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple_200"
+                        android:fontFamily="@font/nunitoregular"
+                        android:text="Request for design"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:background="@color/purple_200" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/check_projects"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/purple_100"
+                app:cardCornerRadius="@dimen/_10dp"
+                app:cardElevation="@dimen/_10dp"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/_15dp">
+
+                <ImageButton
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:background="@drawable/rounded_corner_button"
+                    android:src="@drawable/ic_round_all_inbox_24"
+                    android:backgroundTint="@color/purple_700"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoblack"
+                        android:text="Check Projects"
+                        android:textColor="@color/purple_700"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoregular"
+                        android:text="View your works"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:background="@color/purple_700" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_call_carrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_call_1_carrier">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/get_templates"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/purple_100"
+                app:cardCornerRadius="@dimen/_10dp"
+                app:cardElevation="@dimen/_10dp"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/_15dp">
+
+                <ImageButton
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:background="@drawable/rounded_corner_button"
+                    android:src="@drawable/ic_round_verified_user_24"
+                    android:backgroundTint="@color/purple_700"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoblack"
+                        android:text="Design It"
+                        android:textColor="@color/purple_700"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoregular"
+                        android:text="Get our templates"
+                        android:textColor="@color/grey"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:background="@color/purple_700" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sign_out_now"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:elevation="@dimen/_10dp"
+                app:cardBackgroundColor="@color/purple_700"
+                app:cardCornerRadius="@dimen/_10dp"
+                app:cardElevation="@dimen/_10dp"
+                app:cardUseCompatPadding="true"
+                android:clipToPadding="true"
+                app:contentPadding="@dimen/_15dp">
+
+                <ImageButton
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:background="@drawable/rounded_corner_button"
+                    android:backgroundTint="@color/purple_500"
+                    android:src="@drawable/ic_outline_lock_24"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoblack"
+                        android:text="Sign Out"
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunitoregular"
+                        android:textColor="@color/grey_light"
+                        android:text="Thank you"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="@dimen/_50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:background="@color/purple_200" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

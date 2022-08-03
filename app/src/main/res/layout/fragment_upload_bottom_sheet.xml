@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#131313"
+    tools:context=".UploadBottomSheetFragment">
+
+    <TextView
+        android:id="@+id/selection_info"
+        android:layout_margin="@dimen/_20dp"
+        android:text="Selection Information"
+        android:fontFamily="@font/nunitosemibold"
+        android:layout_width="match_parent"
+        android:textColor="@color/grey"
+        android:layout_height="wrap_content"
+        app:drawableEndCompat="@drawable/ic_round_close_15"
+        app:drawableTint="@color/grey" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <Button
+        android:text="Create Zip"
+        android:id="@+id/create_zip_file"
+        android:textColor="@color/purple_500"
+        android:layout_margin="@dimen/_10dp"
+        android:fontFamily="@font/montserratregular"
+        android:background="@drawable/transparent_background"
+        android:drawableTop="@drawable/ic_outline_folder_zip_24"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:letterSpacing="0"
+        android:drawableTint="@color/purple_500"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/upload_single_zip"
+        android:text="Upload Zip"
+        android:textColor="@color/purple_500"
+        android:textAllCaps="false"
+        android:drawableTint="@color/purple_500"
+        android:layout_margin="@dimen/_10dp"
+        android:fontFamily="@font/montserratregular"
+        android:background="@drawable/transparent_background"
+        android:drawableTop="@drawable/ic_outline_web_stories_24"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:letterSpacing="0"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/upload_single_multiple"
+        android:text="Image(s)"
+        android:drawableTint="@color/purple_500"
+        android:textColor="@color/purple_500"
+        android:textAllCaps="false"
+        android:layout_margin="@dimen/_10dp"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:letterSpacing="0"
+        android:fontFamily="@font/montserratregular"
+        android:background="@drawable/transparent_background"
+        android:drawableTop="@drawable/ic_baseline_image_search_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:layout_marginStart="@dimen/_20dp"
+        android:layout_marginEnd="@dimen/_20dp"
+        android:id="@+id/upload_selections"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableTint="@color/purple_500"
+        android:fontFamily="@font/montserratblack"
+        android:letterSpacing="0"
+        android:padding="3dp"
+        android:paddingEnd="@dimen/_20dp"
+        android:paddingStart="@dimen/_20dp"
+        android:drawableEnd="@drawable/ic_round_arrow_forward_24"
+        android:textColor="@color/purple_500"
+        android:text="Upload Selection"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textSize="17sp" />
+
+</LinearLayout>

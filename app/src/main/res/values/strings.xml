@@ -4,11 +4,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Creators</string>
     <string name="title_notifications">Notifications</string>
+    <string name="channelId">101</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="demo_text_custom_alert">We are working at the back to get this solved. Kindly hold on or try again\n
-    There is a network problem we are working behind to get it fix
-    </string>
+    <string name="demo_text_custom_alert">We are working at the back to get this solved. Kindly hold on or try again There is a network problem we are working behind to get it fix</string>
     <string name="click_camera_open">Click Camera Open</string>
     <string name="collection_images">Collection Images</string>
     <string name="text_descriptions">here rounded corners show normally with your code. My test phone is Android 7.1. so I think you should clear the cache of your phone and install this app again. or maybe you should increase the value of</string>
@@ -58,5 +57,9 @@
     <string name="booster">With our booster package your items will be given preference in search results and you will also enjoy automated peer to peer service. Make people to quickly know about your upload</string>
     <string name="not_available">Not available yet</string>
     <string name="webclient_id">697706441523-jnf249p1fidqh7cvbv4e3r5nlu0ocdkg.apps.googleusercontent.com</string>
+    <string name="activate_account_message">Seems your login session token has expired, refresh the token</string>
+    <string name="upload_button">Upload Button</string>
+    <string name="idcards">Identity Cards</string>
+    <string name="buz_card">Business Card</string>
     <!--    <string name="webclient_id">697706441523-uc5u52l1l3c10phon28pomcgiqf520us.apps.googleusercontent.com</string>-->
 </resources>

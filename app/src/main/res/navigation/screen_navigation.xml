@@ -16,11 +16,17 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_dashboardFragment_to_profileFormFragment"
-            app:destination="@id/profileFormFragment" />
-        <action
             android:id="@+id/action_dashboardFragment_to_projectsFragment"
             app:destination="@id/projectsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_viewProjectsFragment"
+            app:destination="@id/viewProjectsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_activateAccountFragment"
+            app:destination="@id/activateAccountFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_uploadZipFragment"
+            app:destination="@id/uploadZipFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFormFragment"
@@ -31,6 +37,9 @@
             android:name="card_type"
             app:argType="string"
             android:defaultValue="id card" />
+        <argument
+            android:name="projectFiles"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/photoCamera"
@@ -42,4 +51,60 @@
         android:name="com.zeoharlem.append.xtremecardz.ui.ProjectsFragment"
         android:label="fragment_projects"
         tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/viewProjectsFragment"
+        android:name="com.zeoharlem.append.xtremecardz.ui.ViewProjectsFragment"
+        android:label="fragment_view_projects"
+        tools:layout="@layout/fragment_view_projects" >
+        <action
+            android:id="@+id/action_viewProjectsFragment_to_openContentFragment"
+            app:destination="@id/openContentFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="projectX"
+            app:argType="com.zeoharlem.append.xtremecardz.models.ProjectInfoX"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/openContentFragment"
+        android:name="com.zeoharlem.append.xtremecardz.bottomsheets.OpenContentFragment"
+        android:label="fragment_open_content"
+        tools:layout="@layout/fragment_open_content" >
+        <action
+            android:id="@+id/action_openContentFragment_to_viewProjectsFragment"
+            app:destination="@id/viewProjectsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="projectX"
+            app:argType="com.zeoharlem.append.xtremecardz.models.ProjectInfoX" />
+    </fragment>
+    <dialog
+        android:id="@+id/activateAccountFragment"
+        android:name="com.zeoharlem.append.xtremecardz.ui.ActivateAccountFragment"
+        android:label="fragment_activate_account"
+        tools:layout="@layout/fragment_activate_account" />
+    <fragment
+        android:id="@+id/uploadZipFragment"
+        android:name="com.zeoharlem.append.xtremecardz.UploadZipFragment"
+        android:label="fragment_upload_zip"
+        tools:layout="@layout/fragment_upload_zip" >
+        <action
+            android:id="@+id/action_uploadZipFragment_to_uploadBottomSheetFragment"
+            app:destination="@id/uploadBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/uploadBottomSheetFragment"
+        android:name="com.zeoharlem.append.xtremecardz.UploadBottomSheetFragment"
+        android:label="fragment_upload_bottom_sheet"
+        tools:layout="@layout/fragment_upload_bottom_sheet" >
+        <action
+            android:id="@+id/action_uploadBottomSheetFragment_to_profileFormFragment"
+            app:destination="@id/profileFormFragment" />
+    </dialog>
 </navigation>

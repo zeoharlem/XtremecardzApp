@@ -31,12 +31,18 @@ import com.zeoharlem.append.xtremecardz.utils.Constants
 import com.zeoharlem.append.xtremecardz.utils.MyCustomExtUtils.capitalizeWords
 import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils
 import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils.createPartFromString
+import com.zeoharlem.append.xtremecardz.utils.XtremeCardzUtils.getFileName
 import com.zeoharlem.append.xtremecardz.viewmodels.PhotoCameraViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class CameraBottomSheetDialog: BottomSheetDialogFragment() {
@@ -47,11 +53,15 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val photoViewModel by activityViewModels<PhotoCameraViewModel>()
+    private var projectFiles = ""
+    private var projectCode = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         profileForm         = requireArguments().getParcelable("profileForm")!!
         capturedImageData   = requireArguments().getParcelable("capturedImageData")!!
+        projectFiles = requireActivity().intent.getStringExtra("projectFiles")!!
+        projectCode = requireActivity().intent.getStringExtra("projectCode")!!
     }
 
     override fun onCreateView(
@@ -81,7 +91,7 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
                         networkResult.dataSource.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
-                    val message = "Processing Completed. Your data has been sent and you will be contacted shortly"
+                    val message = "Upload Completed. Your data has been sent and you will be contacted shortly"
                     XtremeCardzUtils.customAlertDialog(Dialog(requireContext()), message) {
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         requireActivity().finish()
@@ -116,9 +126,7 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
         binding.fullname.text       = profileForm?.fullname?.capitalizeWords()
         binding.cardType.text       = profileForm?.cardType?.capitalizeWords()
         binding.profileImage.setImageURI(capturedImageData.capturedItem)
-
         submitVettedForm()
-
     }
 
     override fun onStart() {
@@ -148,21 +156,42 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
 
     private fun submitVettedForm(){
         binding.submitProofRead.setOnClickListener {
+            Toast.makeText(requireContext(), "project $projectFiles", Toast.LENGTH_SHORT).show()
+
+            Log.e("CameraBottomProfileForm", "submitVettedForm: $profileForm", )
+            Log.e("CameraBottomProfileForm", "projectFiles: $projectFiles", )
             capturedImageData.capturedItem?.let { imageUri ->
                 //val convertedImage  = convertUriToBitmap(imageUri)
                 Log.e("CameraBottom", "submitVettedForm: imageurl call", )
                 XtremeCardzUtils.readKey("token", requireContext())?.let { token ->
+                    val file = setFileInputOutStream(capturedImageData.capturedItem!!)
                     photoViewModel.submitProjectInfoAction(
                         "Bearer $token",
                         requestBodyQueries(),
-                        setUpImageUploadFileTask(capturedImageData.filePath)
+                        setUpImageUploadFileTask(file.absolutePath)
                     )
                     Log.e("CameraBottom", "Call Queries ${requestBodyQueries()}", )
+                    for(query in requestBodyQueries()){
+                        Log.e("HashMapValues", "submitVettedForm: ${query.value}", )
+                    }
                 }
                 Toast.makeText(requireContext(), "image: ${imageUri.path}" +
                         " string: ${capturedImageData.filePath}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setFileInputOutStream(selectedImageUri: Uri): File {
+        val parcelFileDescriptor = requireActivity().contentResolver.openFileDescriptor(
+            selectedImageUri, "r", null)
+
+        val inputStream = FileInputStream(parcelFileDescriptor!!.fileDescriptor)
+        val file = File(requireActivity().cacheDir,
+            requireActivity().getFileName(selectedImageUri)!!
+        )
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+        return file
     }
 
     private fun getFormFields(): HashMap<String, String>{
@@ -176,15 +205,14 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
         formatForm["back_content"]  = profileForm!!.backContentDesc
         formatForm["company_address"]   = profileForm!!.companyAddress
         formatForm["card_number"]   = profileForm!!.cardNumbers!!
+        formatForm["project_code"]  = profileForm!!.project_code!!
         return formatForm
     }
 
     private fun submitFormAction(){
         val file    = File(capturedImageData.filePath)
-        val requestBody: RequestBody = RequestBody.create(
-            MediaType.parse("image/*"),
-            file
-        )
+        val requestBody: RequestBody = file
+            .asRequestBody("image/*".toMediaTypeOrNull())
         val propertyImagePart: MultipartBody.Part   = MultipartBody.Part.createFormData(
             "barter_image", file.name, requestBody
         )
@@ -259,13 +287,17 @@ class CameraBottomSheetDialog: BottomSheetDialogFragment() {
         partQueriesBody["company_address"]   = createPartFromString(profileForm!!.companyAddress)
         partQueriesBody["number_of_cards"]   = createPartFromString(profileForm!!.cardNumbers!!)
         partQueriesBody["uid"]          = createPartFromString(mAuth.currentUser!!.uid)
+        partQueriesBody["card_type"] = createPartFromString(profileForm!!.cardType!!)
+        partQueriesBody["project_code"] = createPartFromString(projectCode)
+        partQueriesBody["projectFiles"] = createPartFromString(projectFiles)
         //partQueriesBody["id"]   = createPartFromString(XtremeCardzUtils.readKey("id", requireContext())!!)
         return partQueriesBody
     }
 
     private fun setUpImageUploadFileTask(filePath: String): MultipartBody.Part {
         val file                        = File(filePath)
-        val requestBody: RequestBody    = RequestBody.create(MediaType.parse("image/*"), file)
+        val requestBody: RequestBody    = file.asRequestBody("image/*".toMediaTypeOrNull())
+        //val requestBody: RequestBody    = "json".toRequestBody("multipart/form-data".toMediaTypeOrNull())
         return MultipartBody.Part.createFormData("xtreme_image", file.name, requestBody)
     }
 }

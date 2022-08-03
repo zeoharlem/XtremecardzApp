@@ -37,10 +37,14 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import coil.clear
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
+import com.google.common.util.concurrent.ListenableFuture
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -53,12 +57,15 @@ import com.zeoharlem.append.xtremecardz.databinding.ActivityPhotoCameraBinding
 import com.zeoharlem.append.xtremecardz.models.CapturedImage
 import com.zeoharlem.append.xtremecardz.models.HotDeals
 import com.zeoharlem.append.xtremecardz.models.Profile
+import com.zeoharlem.append.xtremecardz.notifications.MyAppsNotificationManager
 import com.zeoharlem.append.xtremecardz.ui.activities.CropUploadFormActivity
 import com.zeoharlem.append.xtremecardz.viewmodels.PhotoCameraViewModel
+import com.zeoharlem.append.xtremecardz.workers.MyZipUploadWorker
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
 import java.io.File.separator
 import java.nio.ByteBuffer
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -66,6 +73,7 @@ import java.util.concurrent.Executors
 @SuppressLint("LogNotTimber")
 class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListener {
 
+    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private var hotDeals: HotDeals? = null
     private lateinit var cameraProviderState: Camera
     private var flashLightState: Boolean?   = false
@@ -108,7 +116,8 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        photoCameraViewModel= ViewModelProvider(this)[PhotoCameraViewModel::class.java]
+        photoCameraViewModel = ViewModelProvider(this)[PhotoCameraViewModel::class.java]
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraExecutors     = Executors.newSingleThreadExecutor()
         capturedImages      = ArrayList<CapturedImage>()
@@ -128,12 +137,21 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
                 val bottomSheetDialogFragment = CameraBottomSheetDialog()
                 bundle.putParcelable("profileForm", profileForm)
                 bundle.putParcelable("capturedImageData", capturedImageData)
+                bundle.putString("projectCode", intent.getStringExtra("projectCode"))
+                bundle.putString("projectFiles", intent.getStringExtra("projectFiles"))
                 bottomSheetDialogFragment.arguments = bundle
                 bottomSheetDialogFragment.show(supportFragmentManager, "cameraBottomDialogFrag")
                 cameraExecutors.shutdown()
             }
         }
 
+        //zipUploadWorker()
+
+    }
+
+    private fun zipUploadWorker(){
+        val mRequest: WorkRequest = OneTimeWorkRequestBuilder<MyZipUploadWorker>().build()
+        WorkManager.getInstance(applicationContext).enqueue(mRequest)
     }
 
     //Play Beep or Shutter Sound
@@ -277,7 +295,7 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
     }
 
     private fun startPhoneCamera(){
-        val cameraProviderFuture    = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture    = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider   = cameraProviderFuture.get()
 
@@ -288,11 +306,28 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
             try {
                 cameraProvider.unbindAll()
                 cameraProviderState = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
-
             }
             catch (exception: Exception){
                 Log.e("PhotoCameraEx", "startPhoneCamera: Failed", exception)
             }
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun stopPhoneCamera(){
+        cameraProviderFuture.addListener({
+            try{
+                val cameraProvider: ProcessCameraProvider   = cameraProviderFuture.get()
+
+                val preview = Preview.Builder().build().also { mPreview ->
+                    mPreview.setSurfaceProvider(photoCameraBinding.surfaceView.surfaceProvider)
+                }
+                cameraProvider.unbindAll()
+                preview.camera?.release()
+            }
+            catch (e: Exception){
+                Log.e("PhotoCamera", "stopPhoneCamera: Camera stopped", )
+            }
+
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -462,6 +497,7 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
         cameraExecutors.shutdown()
         capturedImages.clear()
         capturedUriImages.clear()
+        stopPhoneCamera()
         //capturedImageAdapter.notifyDataSetChanged()
     }
 
@@ -471,6 +507,12 @@ class PhotoCamera : AppCompatActivity(), CapturedImageAdapters.OnItemClickListen
         cameraExecutors.shutdown()
 //        capturedImages.clear()
         capturedUriImages.clear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        cameraExecutors.shutdown()
+        stopPhoneCamera()
     }
 
     override fun onItemClicked(capturedImage: CapturedImage, position: Int) {

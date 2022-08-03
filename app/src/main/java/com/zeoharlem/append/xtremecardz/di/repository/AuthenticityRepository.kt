@@ -95,7 +95,6 @@ class AuthenticityRepository @Inject constructor(private val repository: Reposit
         try {
             val response    = repository.remoteDataSource.login(query)
             _loginNetworkResults.value   = NetworkResults.Success(response.body())
-            Log.e("AuthenticityRepo", "login: ${response.body()}", )
         }
         catch (e: Exception){
             _loginNetworkResults.value = NetworkResults.Error(e.localizedMessage)
@@ -115,7 +114,7 @@ class AuthenticityRepository @Inject constructor(private val repository: Reposit
                 else{
                     userLoggedMutableLiveData.value = false
                     _authState.value    = AuthState.Error(task.exception?.localizedMessage)
-                    throw Exception(task.exception?.localizedMessage)
+                    //throw Exception(task.exception?.localizedMessage)
                 }
         }
     }

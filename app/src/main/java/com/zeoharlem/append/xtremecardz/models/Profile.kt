@@ -32,5 +32,7 @@ data class Profile(
     val cardType: String? = null,
     @SerializedName("card_number")
     val cardNumbers: String? = null,
+    @SerializedName("project_code")
+    val project_code: String? = null,
 ): Parcelable
 

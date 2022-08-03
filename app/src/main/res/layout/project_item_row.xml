@@ -1,144 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_10dp"
-    android:paddingStart="@dimen/_10dp"
-    android:layout_marginBottom="@dimen/_20dp"
-    android:paddingEnd="@dimen/_10dp">
+    android:clickable="true"
+    android:paddingBottom="@dimen/_10dp"
+    android:focusable="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_blog_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="5dp"
-        android:elevation="0dp"
-        app:cardCornerRadius="@dimen/_16dp"
-        app:cardElevation="@dimen/_20dp"
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/_20dp"
+        android:layout_marginTop="@dimen/_10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:background="@drawable/gradient_background"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/project_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratblack"
-                android:text="Designation"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:layout_margin="@dimen/_20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/project_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratregular"
-                android:text="Project Address and Location"
-                android:textSize="13sp"
-                android:lineSpacingExtra="@dimen/_5dp"
-                android:layout_margin="@dimen/_20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/project_title" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/gradient_background"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/project_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/transparent_background"
-                    android:drawableTint="@color/white"
-                    android:fontFamily="@font/montserratblack"
-                    android:paddingStart="@dimen/_25dp"
-                    android:paddingEnd="@dimen/_25dp"
-                    android:text="View"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/project_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/transparent_background"
-                    android:drawableTint="@color/white"
-                    android:fontFamily="@font/montserratblack"
-                    android:paddingStart="@dimen/_25dp"
-                    android:paddingEnd="@dimen/_25dp"
-                    android:text="Ongoing"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="0dp"
-        android:paddingEnd="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/card_view_blog_image"
-        app:layout_constraintStart_toStartOf="@+id/card_view_blog_image"
-        app:layout_constraintTop_toBottomOf="@+id/card_view_blog_image">
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:fontFamily="@font/nunitoblack"
+        android:text="John D. Phillips"
+        android:textColor="@color/purple_500"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/_10dp"
-            android:paddingEnd="@dimen/_10dp">
+    <TextView
+        android:id="@+id/designation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_25dp"
+        android:layout_marginTop="@dimen/_5dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Software Engineer"
+        android:textSize="15sp"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/fullname" />
 
-            <TextView
-                android:id="@+id/tips_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1"
-                android:text="Daily Tips"
-                android:fontFamily="@font/montserratregular"
-                android:textColor="@color/yellow_700"
-                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tips_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5dp"
-                android:alpha="0.3"
-                android:text="2 hours Ago"
-                android:fontFamily="@font/montserratblack"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_25dp"
+        android:layout_marginEnd="@dimen/_20dp"
+        android:fontFamily="@font/nunitoregular"
+        android:lineSpacingExtra="@dimen/_5dp"
+        android:text="Project Address and Location"
+        android:textSize="13sp"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/designation" />
 
-    </LinearLayout>
+<!--    <TextView-->
+<!--        android:id="@+id/company_address"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/_25dp"-->
+<!--        android:fontFamily="@font/montserratregular"-->
+<!--        android:lineSpacingExtra="@dimen/_5dp"-->
+<!--        android:paddingEnd="@dimen/_10dp"-->
+<!--        android:text="Project Address and Location"-->
+<!--        android:textSize="13sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profile_image"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/company_name" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/project_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/transparent_background"-->
+<!--            android:drawableEnd="@drawable/ic_round_arrow_forward_24"-->
+<!--            android:drawableTint="@color/black"-->
+<!--            android:fontFamily="@font/montserratblack"-->
+<!--            android:paddingStart="@dimen/_25dp"-->
+<!--            android:paddingEnd="@dimen/_50dp"-->
+<!--            android:text="View"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp" />-->
+
+<!--    </LinearLayout>-->
+
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingStart="0dp"-->
+    <!--        android:paddingEnd="0dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/card_view_blog_image"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/card_view_blog_image"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/card_view_blog_image">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="@dimen/_10dp"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            android:paddingStart="@dimen/_10dp"-->
+    <!--            android:paddingEnd="@dimen/_10dp">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/tips_category"-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="2dp"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:text="Work in progress"-->
+    <!--                android:fontFamily="@font/montserratregular"-->
+    <!--                android:textColor="@color/yellow_700"-->
+    <!--                android:textSize="12sp" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/tips_date"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="@dimen/_5dp"-->
+    <!--                android:alpha="0.3"-->
+    <!--                android:text="2 hours Ago"-->
+    <!--                android:fontFamily="@font/montserratregular"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textSize="13sp" />-->
+    <!--        </LinearLayout>-->
+
+    <!--    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

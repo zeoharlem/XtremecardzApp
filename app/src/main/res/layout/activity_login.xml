@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -47,6 +48,7 @@
             android:fontFamily="@font/montserratblack"
             android:hint="Email"
             app:errorEnabled="true"
+            android:focusable="true"
             app:errorTextAppearance="@font/montserratblack"
             app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,21 +61,24 @@
                 android:layout_marginTop="20dp"
                 android:drawableEnd="@drawable/ic_outline_email_24"
                 android:drawablePadding="8dp"
-                android:fontFamily="@font/montserratregular"
+                android:fontFamily="@font/nunitoblack"
                 android:gravity="center_vertical"
-                android:hint="zeoharlem@xtremecardz.com"
+                android:hint="Email Address"
                 android:inputType="textEmailAddress"
                 android:paddingStart="15dp"
                 android:paddingTop="10dp"
+                android:textColor="@color/white"
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
-                android:textColorHint="@color/grey"
+                android:drawableTint="@color/purple_500"
+                android:textColorHint="@color/purple_500"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/OutlinedRoundedBox"
+            android:theme="@style/OutlinedRoundedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -93,15 +98,17 @@
                 android:layout_marginTop="20dp"
                 android:drawableEnd="@drawable/ic_round_edit_24"
                 android:drawablePadding="8dp"
-                android:fontFamily="@font/montserratregular"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunitoblack"
                 android:gravity="center_vertical"
                 android:inputType="textPassword"
                 android:paddingStart="15dp"
+                android:hint="Type Password"
+                android:drawableTint="@color/white"
                 android:paddingTop="10dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
                 android:singleLine="true"
-                android:text="admin12345"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -186,10 +193,10 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/montserratblack"
+                android:fontFamily="@font/nunitoblack"
                 android:padding="5dp"
                 android:text="Sign Up"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
 

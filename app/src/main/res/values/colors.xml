@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="purple_200">#cfcf4b</color>
+    <color name="purple_500">#cfa54b</color>
+    <color name="purple_700">#8e1838</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="dark">#131313</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
@@ -22,4 +23,5 @@
     <color name="yellow_700">#FF3700B3</color>
     <color name="purple_400">#FF6700B3</color>
     <color name="whatsapp">#128c7e</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/purple_500</color>
 </resources>

@@ -2,6 +2,8 @@ package com.zeoharlem.append.xtremecardz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -9,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.zeoharlem.append.xtremecardz.databinding.ActivityMainBinding
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 //            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
 //            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 //        )
+        window.navigationBarColor = getColor(R.color.black)
 
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         loginViewModel      = ViewModelProvider(this)[LoginViewModel::class.java]
@@ -59,6 +63,11 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSupportNavigateUp(): Boolean {

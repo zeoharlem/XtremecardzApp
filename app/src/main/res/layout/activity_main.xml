@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
         android:paddingEnd="20dp"
+        android:theme="@style/toolbarWhiteIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +22,7 @@
             android:id="@+id/title_header"
             android:text="@string/app_name"
             android:textSize="17sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/montserratblack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

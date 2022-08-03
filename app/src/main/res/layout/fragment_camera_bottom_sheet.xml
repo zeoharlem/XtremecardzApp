@@ -119,13 +119,13 @@
             android:layout_width="@dimen/_50dp"
             android:layout_height="@dimen/_50dp"
             android:background="@drawable/round_circle"
-            android:backgroundTint="@color/whatsapp"
+            android:backgroundTint="@color/grey_light"
             android:fontFamily="@font/montserratblack"
             android:src="@drawable/whatsapp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/share_pro_button"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
 
         <!--        <ImageButton-->
         <!--            android:id="@+id/edit_button"-->
@@ -250,7 +250,7 @@
                 android:textColor="@color/grey"
                 android:textSize="15sp"
                 app:drawableStartCompat="@drawable/ic_outline_location_on_24"
-                app:drawableTint="@color/purple_700" />
+                app:drawableTint="@color/grey" />
 
             <TextView
                 android:id="@+id/website_link"
@@ -264,7 +264,7 @@
                 android:textColor="@color/grey"
                 android:textSize="15sp"
                 app:drawableStartCompat="@drawable/ic_baseline_send_24"
-                app:drawableTint="@color/purple_700" />
+                app:drawableTint="@color/grey" />
 
             <TextView
                 android:id="@+id/designation_2"
@@ -278,7 +278,7 @@
                 android:textColor="@color/grey"
                 android:textSize="15sp"
                 app:drawableStartCompat="@drawable/ic_round_verified_user_24"
-                app:drawableTint="@color/purple_700" />
+                app:drawableTint="@color/grey" />
 
             <TextView
                 android:id="@+id/company_address"
@@ -293,7 +293,7 @@
                 android:textColor="@color/grey"
                 android:textSize="15sp"
                 app:drawableStartCompat="@drawable/ic_baseline_map_24"
-                app:drawableTint="@color/purple_700" />
+                app:drawableTint="@color/grey" />
 
             <TextView
                 android:id="@+id/back_content"
@@ -307,7 +307,7 @@
                 android:textColor="@color/grey"
                 android:textSize="15sp"
                 app:drawableStartCompat="@drawable/ic_outline_settings_24"
-                app:drawableTint="@color/purple_700" />
+                app:drawableTint="@color/grey" />
 
         </LinearLayout>
     </ScrollView>
