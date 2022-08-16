@@ -60,9 +60,6 @@ class LoginActivity : AppCompatActivity() {
             loginUsingGoogleSignInApplication()
         }
 
-        //Get generated token from server
-        setClientGeneratedToken()
-
         loginViewModel!!.getAuthStateRepository().observe(this){
             when(it){
                 is AuthState.Loading -> {
@@ -97,6 +94,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel!!.getAuthRepository().loginNetworkResults.observe(this){ network ->
             when(network){
                 is NetworkResults.Loading -> {
+                    XtremeCardzUtils.customAlertDialog("Checking, Please wait!", Dialog(this), false)
                     Toast.makeText(applicationContext, "Please wait...", Toast.LENGTH_SHORT).show()
                     binding.loginBtn.isEnabled  = false
                 }
@@ -105,7 +103,8 @@ class LoginActivity : AppCompatActivity() {
                     XtremeCardzUtils.saveKey("firstname", it.firstName!!, applicationContext)
                     XtremeCardzUtils.saveKey("lastname", it.lastName!!, applicationContext)
                     XtremeCardzUtils.saveKey("email", it.email!!, applicationContext)
-                    //startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 }
                 is NetworkResults.Error -> {
                     Toast.makeText(applicationContext, network.message, Toast.LENGTH_LONG).show()
@@ -189,21 +188,22 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = loginViewModel?.getMyFirebaseAuth()?.currentUser
-        if(XtremeCardzUtils.readKey("firstname", applicationContext)?.isEmpty() == true ||
-            XtremeCardzUtils.readKey("email", applicationContext)?.isEmpty() == true){
-            return
-        }
+//        if(XtremeCardzUtils.readKey("firstname", applicationContext)?.isEmpty() == true ||
+//            XtremeCardzUtils.readKey("email", applicationContext)?.isEmpty() == true){
+//            return
+//        }
         if(currentUser != null && currentUser.isEmailVerified){
             val queryMap        = HashMap<String, String>()
             queryMap["email"]   = currentUser.email.toString()
             queryMap["password"]= "password"
+
             lifecycleScope.launch {
                 loginViewModel?.getAuthRepository()?.login(queryMap)
             }
+
+            //Get generated token from server
+            setClientGeneratedToken()
         }
     }
 
-    private fun customAlertDialog(title: String, message: String){
-
-    }
 }

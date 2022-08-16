@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.preference.PreferenceManager
 import com.zeoharlem.append.xtremecardz.R
@@ -147,7 +148,32 @@ object XtremeCardzUtils {
         closeButton.setOnClickListener {
             dialog.dismiss()
         }
-        dialog.show()
+        if (!dialog.isShowing)
+            dialog.show()
+    }
+
+    //Method Overload
+    fun customAlertDialog(message: String?, dialog: Dialog, showClose: Boolean){
+        dialog.setCancelable(false)
+        val backColor       = ColorDrawable(Color.TRANSPARENT)
+        val insetDrawable   = InsetDrawable(backColor, 0)
+        dialog.window?.setBackgroundDrawable(insetDrawable)
+        //dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.custom_alert_dialog)
+
+        val errorMessage    = dialog.findViewById<TextView>(R.id.errorMessage)
+        val closeButton     = dialog.findViewById<Button>(R.id.alertCustomCloseBtn)
+
+        errorMessage.text   = message
+
+        closeButton.isVisible   = showClose
+
+        closeButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        if (!dialog.isShowing)
+            dialog.show()
     }
 
     //Higher function order(okEvent()->Unit)

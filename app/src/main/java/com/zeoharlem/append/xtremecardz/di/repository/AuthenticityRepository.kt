@@ -94,7 +94,12 @@ class AuthenticityRepository @Inject constructor(private val repository: Reposit
         _loginNetworkResults.value   = NetworkResults.Loading()
         try {
             val response    = repository.remoteDataSource.login(query)
-            _loginNetworkResults.value   = NetworkResults.Success(response.body())
+            if(response.isSuccessful) {
+                _loginNetworkResults.value  = NetworkResults.Success(response.body())
+            }
+            else{
+                _loginNetworkResults.value  = NetworkResults.Error(response.errorBody().toString())
+            }
         }
         catch (e: Exception){
             _loginNetworkResults.value = NetworkResults.Error(e.localizedMessage)
