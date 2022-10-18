@@ -105,6 +105,8 @@ class UploadBottomSheetFragment : BottomSheetDialogFragment(), UploadRequestBody
         }
 
         binding.uploadSelections.setOnClickListener {
+            //it.isEnabled = false
+            //binding.uploadSelections.text = "Please Wait..."
             val projectCode = "${mAuth.currentUser!!.uid}-${System.currentTimeMillis()}"
             //Trigger the Upload Event
             clickUploadSelection(projectCode)
